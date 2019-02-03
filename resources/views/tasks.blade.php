@@ -31,7 +31,8 @@
                                 <li>{{ $command->command }}</li>
                                 <li><ul>
                                     @foreach($command->parameters as $parameter)
-                                        <li>{{ $parameter->name }}</li>)
+                                        <li>{{ $parameter->name }}</li>
+                                        <li>{{ $parameter->value() }}</li>
                                     @endforeach
                                 </ul></li>
                             @endforeach

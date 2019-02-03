@@ -10,5 +10,5 @@ class values extends Model
      * @var string
      */
     protected $table = 'values';
-    
+
 }

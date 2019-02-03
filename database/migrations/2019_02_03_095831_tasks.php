@@ -52,12 +52,7 @@ class Tasks extends Migration
             $table->foreign('commandsId')->references('id')->on('commands');
             $table->unsignedInteger('parametersId')->nullable();
             $table->foreign('parametersId')->references('id')->on('parameters');
-            $table->timestamps();
-        });
-
-        Schema::create('values', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('value');
+            $table->string('value')->nullable();
             $table->timestamps();
         });
 
@@ -85,13 +80,12 @@ class Tasks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks_parameters');
+        Schema::dropIfExists('commands_parameters');
         Schema::dropIfExists('tasks_commands');
         Schema::dropIfExists('tasks_variables');
         Schema::dropIfExists('commands');
         Schema::dropIfExists('parameters');
         Schema::dropIfExists('variables');
-        Schema::dropIfExists('values');
         Schema::dropIfExists('tasks');
     }
 }

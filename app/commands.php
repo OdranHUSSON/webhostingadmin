@@ -32,6 +32,6 @@ class commands extends Model
             'commands_parameters',
             'id',
             'parametersId'
-        )->withTimestamps();
+        )->withPivot('value');
     }
 }

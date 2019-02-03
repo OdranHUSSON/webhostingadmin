@@ -20,6 +20,14 @@ class parameters extends Model
             'commands_parameters',
             'id',
             'commandsId'
-        )->withTimestamps();
+        )->withPivot('value');
     }
+
+    /**
+     * @return mixed
+     */
+    public function value() {
+        return $this->pivot->value;
+    }
+
 }
