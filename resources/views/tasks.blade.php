@@ -14,7 +14,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="app">
         <div class="row">
             <div class="col s12">
                 <ul class="collection with-header blue-grey">
@@ -42,7 +42,16 @@
                 <button class="btn btn-large right waves-effect waves-light" type="submit">Save</button>
             </form>
         </div>
+        @{{ message }}
     </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!'
+            }
+        })
+    </script>
 @endsection
 
 

@@ -18,4 +18,12 @@ class tasksController extends Controller
         return view('tasks')
             ->with("tasks", $tasks);
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function retrieve() {
+        $tasks = tasks::all();
+        return response()->json($tasks);
+    }
 }
