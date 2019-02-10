@@ -19,10 +19,10 @@
             <div class="col s12">
                 <ul class="collection with-header">
                     <li class="collection-header">Tasks</li>
-                    <li v-if="errored">
-                        <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+                    <li v-if="errored" class="collection-item">
+                        <p>We're sorry, we're not able to retrieve tasks</p>
                     </li>
-                    <li v-if="loading">Loading...</li>
+                    <li v-if="loading" class="collection-item">Loading...</li>
                     <li v-else v-for="task in tasks" class="collection-item">@{{ task.name }}</li>
                 </ul>
             </div>
