@@ -17,11 +17,13 @@
     <div class="container" id="app">
         <div class="row">
             <div class="col s12">
-                <ul class="collection with-header blue-grey">
+                <ul class="collection with-header">
                     <li class="collection-header">Tasks</li>
-                    @foreach($tasks as $task)
-                        <li class="collection-item">{{ $task->name }}</li>
-                    @endforeach
+                    <li v-if="errored">
+                        <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+                    </li>
+                    <li v-if="loading">Loading...</li>
+                    <li v-else v-for="task in tasks" class="collection-item">@{{ task.name }}</li>
                 </ul>
             </div>
         </div>
@@ -42,13 +44,28 @@
                 <button class="btn btn-large right waves-effect waves-light" type="submit">Save</button>
             </form>
         </div>
-        @{{ message }}
     </div>
     <script type="text/javascript">
         var app = new Vue({
             el: '#app',
-            data: {
-                message: 'Hello Vue!'
+            data () {
+                return {
+                    tasks: null,
+                    loading: true,
+                    errored: false
+                }
+            },
+            mounted () {
+                axios
+                    .get('/api/tasks')
+                    .then(response => {
+                        this.tasks = response.data
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true
+                    })
+                    .finally(() => this.loading = false)
             }
         })
     </script>
