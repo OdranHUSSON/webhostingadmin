@@ -45,30 +45,7 @@
             </form>
         </div>
     </div>
-    <script type="text/javascript">
-        var app = new Vue({
-            el: '#app',
-            data () {
-                return {
-                    tasks: null,
-                    loading: true,
-                    errored: false
-                }
-            },
-            mounted () {
-                axios
-                    .get('/api/tasks')
-                    .then(response => {
-                        this.tasks = response.data
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        this.errored = true
-                    })
-                    .finally(() => this.loading = false)
-            }
-        })
-    </script>
+    <script type="text/javascript" src="{{ asset("js/tasks.js") }}"></script>
 @endsection
 
 
