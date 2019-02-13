@@ -25,9 +25,7 @@ class tasks extends Model
     public function commands() {
         return $this->belongsToMany(
             commands::class,
-            'tasks_commands',
-            'id',
-            'commandsId'
+            'tasks_commands'
         )->withTimestamps();
     }
 
@@ -37,9 +35,7 @@ class tasks extends Model
     public function variables() {
         return $this->belongsToMany(
             variables::class,
-            'tasks_variables',
-            'id',
-            'variablesId'
+            'tasks_variables'
         )->withTimestamps();
     }
 }

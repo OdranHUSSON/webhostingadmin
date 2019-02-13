@@ -17,9 +17,7 @@ class variables extends Model
     public function tasks() {
         return $this->belongsToMany(
             tasks::class,
-            'tasks_commands',
-            'id',
-            'tasksId'
+            'tasks_commands'
         )->withTimestamps();
     }
 }

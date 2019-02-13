@@ -17,9 +17,7 @@ class parameters extends Model
     public function commands() {
         return $this->belongsToMany(
             commands::class,
-            'commands_parameters',
-            'id',
-            'commandsId'
+            'commands_parameters'
         )->withPivot('value');
     }
 

@@ -11,23 +11,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 10)->create();
+        $nbToGenerate = 100;
 
-        factory(App\tasks::class, 10)->create();
+        factory(App\User::class, $nbToGenerate)->create();
 
-        $commands = factory(App\commands::class, 10)->create();
+        factory(App\tasks::class, $nbToGenerate)->create();
 
-        App\tasks::all()->each(function ($task) use ($commands){
+        $commands = factory(App\commands::class, $nbToGenerate)->create();
+
+        App\tasks::all()->each(function ($task) use ($commands,$nbToGenerate){
             $tmp = rand(0,4);
             $i=0;
-            $commands = [];
+            $ids = [];
             while($i <= $tmp) {
-                $commands[] = \App\commands::find(rand(0,10));
+                $ids[] = rand(0, $nbToGenerate);
                 $i++;
             }
-
-            /** @var \App\tasks $task */
-            $task->commands()->sync($commands);
+            try {
+                /** @var \App\tasks $task */
+                $task->commands()->attach($ids);
+            }
+            catch(Exception $e) {
+                // If we try to attach something already attached to this command
+                // This is ugly but this is for testing purpose
+            }
         });
     }
 }

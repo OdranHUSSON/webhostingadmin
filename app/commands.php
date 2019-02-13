@@ -17,9 +17,7 @@ class commands extends Model
     public function tasks() {
         return $this->belongsToMany(
             tasks::class,
-            'tasks_commands',
-            'id',
-            'tasksId'
+            'tasks_commands'
         )->withTimestamps();
     }
 
@@ -29,9 +27,7 @@ class commands extends Model
     public function parameters() {
         return $this->belongsToMany(
             parameters::class,
-            'commands_parameters',
-            'id',
-            'parametersId'
+            'commands_parameters'
         )->withPivot('value');
     }
 }

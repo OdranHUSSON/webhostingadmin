@@ -31,10 +31,10 @@ class Tasks extends Migration
 
         Schema::create('tasks_commands', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('tasksId')->nullable();
-            $table->foreign('tasksId')->references('id')->on('tasks');
-            $table->unsignedInteger('commandsId')->nullable();
-            $table->foreign('commandsId')->references('id')->on('commands');
+            $table->unsignedInteger('tasks_id')->nullable();
+            $table->foreign('tasks_id')->references('id')->on('tasks');
+            $table->unsignedInteger('commands_id')->nullable();
+            $table->foreign('commands_id')->references('id')->on('commands');
             $table->timestamps();
         });
 
@@ -48,10 +48,10 @@ class Tasks extends Migration
 
         Schema::create('commands_parameters', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('commandsId')->nullable();
-            $table->foreign('commandsId')->references('id')->on('commands');
-            $table->unsignedInteger('parametersId')->nullable();
-            $table->foreign('parametersId')->references('id')->on('parameters');
+            $table->unsignedInteger('commands_id')->nullable();
+            $table->foreign('commands_id')->references('id')->on('commands');
+            $table->unsignedInteger('parameters_id')->nullable();
+            $table->foreign('parameters_id')->references('id')->on('parameters');
             $table->string('value')->nullable();
             $table->timestamps();
         });
@@ -65,10 +65,10 @@ class Tasks extends Migration
 
         Schema::create('tasks_variables', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('tasksId')->nullable();
-            $table->foreign('tasksId')->references('id')->on('tasks');
-            $table->unsignedInteger('variablesId')->nullable();
-            $table->foreign('variablesId')->references('id')->on('variables');
+            $table->unsignedInteger('tasks_id')->nullable();
+            $table->foreign('tasks_id')->references('id')->on('tasks');
+            $table->unsignedInteger('variables_id')->nullable();
+            $table->foreign('variables_id')->references('id')->on('variables');
             $table->timestamps();
         });
     }
