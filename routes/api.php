@@ -12,8 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('tasks', 'tasksController@retrieveTasks')->name('Retrieve tasks');
-Route::post('tasks', 'tasksController@createTasks')->name('Create a new task');
+Route::get('tasks', 'tasksController@fetch');
+Route::post('tasks', 'tasksController@persist');
+Route::delete('tasks', 'tasksController@delete');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
