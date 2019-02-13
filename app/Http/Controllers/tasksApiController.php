@@ -24,7 +24,8 @@ class tasksApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function fetch() {
-        $tasks = tasks::all();
+        /** @var tasks $tasks */
+        $tasks = tasks::paginate(20);
         return response()->json($tasks);
     }
 
