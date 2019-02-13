@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\commands;
 use Illuminate\Http\Request;
 use App\tasks;
 use Illuminate\Validation\Validator;
@@ -9,6 +10,16 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class tasksApiController extends Controller
 {
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function get($id) {
+        $tasks = tasks::findOrFail($id);
+        $tasks->load('commands');
+        return response()->json($tasks);
+    }
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */

@@ -8,12 +8,9 @@ use App\tasks;
 class taskApiControllerTest extends TestCase
 {
     /**
-     * Create task
-     *
      * @return void
      */
-    public function testCanCreateTask()
-    {
+    public function testCanPersist() {
         $data = [
             'name' => $this->faker->name,
             'description' => $this->faker->paragraph,
@@ -27,14 +24,12 @@ class taskApiControllerTest extends TestCase
     /**
      * @return void
      */
-    public function testCanPersist() {
+    public function testCanDelete() {
         $data = [
-            'name' => $this->faker->name,
-            'description' => $this->faker->paragraph,
-
+            'id' => 9,
         ];
-        $this->post(route('task.post', $data))
-            ->assertStatus(201)
+        $this->delete(route('task.delete', $data))
+            ->assertStatus(204)
             ->assertJsonFragment($data);
     }
 }

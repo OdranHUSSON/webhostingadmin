@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('tasks', 'tasksApiController@fetch')->name('task.get');
+Route::get('tasks/{id}', 'tasksApiController@get')->name('task.getById');
 Route::post('tasks', 'tasksApiController@persist')->name('task.post');
 Route::delete('tasks', 'tasksApiController@delete')->name('task.delete');
 
