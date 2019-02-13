@@ -7,7 +7,7 @@ use App\tasks;
 use Illuminate\Validation\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class taskApiController extends Controller
+class tasksApiController extends Controller
 {
     /**
      * @return \Illuminate\Http\JsonResponse
@@ -39,7 +39,7 @@ class taskApiController extends Controller
         $task->description = $validator["description"];
         $task->save();
 
-        return response()->json($task);
+        return response()->json($task,201);
     }
 
     /**
@@ -58,7 +58,7 @@ class taskApiController extends Controller
             $task = tasks::findOrFail($validator['id']);
             $task->delete();
 
-            return response()->json($task);
+            return response()->json(204);
         }
         catch(ModelNotFoundException $exception) {
             $errorMessage = [

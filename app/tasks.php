@@ -12,6 +12,14 @@ class tasks extends Model
     protected $table = 'tasks';
 
     /**
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'description'
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function commands() {
