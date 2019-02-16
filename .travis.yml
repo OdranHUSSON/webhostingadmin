@@ -1,7 +1,5 @@
 language: php
 php:
-- "7.0"
-- "7.1"
 - "7.2"
 - "7.3"
 before_script:
@@ -16,8 +14,7 @@ cache:
   - $HOME/.composer/cache
 
 script:
-- vendor/bin/codecept run unit
-- vendor/bin/phpcs src
+- vendor/bin/phpunit
 
 notifications:
   email:
