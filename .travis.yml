@@ -2,8 +2,13 @@ language: php
 php:
 - "7.2"
 - "7.3"
+
 before_script:
-- composer selfupdate
+- composer self-update
+- composer install --no-interaction
+- cp .env.travis .env
+- pear install pear/PHP_CodeSniffer
+- phpenv rehash
 
 install:
 - composer self-update
@@ -14,7 +19,8 @@ cache:
   - $HOME/.composer/cache
 
 script:
-- vendor/bin/phpunit
+- vendor/bin/phpunit --coverage-text
+- phpcs --ignore=app/Http/Controllers/Auth,app/Http/Controllers/Controller.php app/Http/Controllers
 
 notifications:
   email:
