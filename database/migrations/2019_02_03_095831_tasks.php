@@ -32,9 +32,9 @@ class Tasks extends Migration
         Schema::create('tasks_commands', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tasks_id')->nullable();
-            $table->foreign('tasks_id')->references('id')->on('tasks');
+            $table->foreign('tasks_id')->references('id')->on('tasks')->onDelete('cascade');;
             $table->unsignedInteger('commands_id')->nullable();
-            $table->foreign('commands_id')->references('id')->on('commands');
+            $table->foreign('commands_id')->references('id')->on('commands')->onDelete('cascade');;
             $table->timestamps();
         });
 

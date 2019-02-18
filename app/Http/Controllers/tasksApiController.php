@@ -70,7 +70,7 @@ class tasksApiController extends Controller
             $task = tasks::findOrFail($validator['id']);
             $task->delete();
 
-            return response()->json(204);
+            return response()->json($validator['id'],204);
         }
         catch(ModelNotFoundException $exception) {
             $errorMessage = [

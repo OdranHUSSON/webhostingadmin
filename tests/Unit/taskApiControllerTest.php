@@ -26,9 +26,20 @@ class taskApiControllerTest extends TestCase
      */
     public function testDeleteMissingTask() {
         $data = [
-            'id' => 9,
+            'id' => 101,
         ];
         $this->delete(route('task.delete', $data))
             ->assertStatus(404);
+    }
+
+    /**
+     * @return void
+     */
+    public function testDelete() {
+        $data = [
+            'id' => 9,
+        ];
+        $this->delete(route('task.delete', $data))
+            ->assertStatus(204);
     }
 }
