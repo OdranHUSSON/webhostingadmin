@@ -1,5 +1,5 @@
 var app = new Vue({
-    el: '#app',
+    el: '#taskslist',
     data () {
         return {
             tasks: null,
@@ -11,7 +11,7 @@ var app = new Vue({
         axios
             .get('/api/tasks')
             .then(response => {
-                this.tasks = response.data
+                this.tasks = response.data.data
             })
             .catch(error => {
                 console.log(error)
