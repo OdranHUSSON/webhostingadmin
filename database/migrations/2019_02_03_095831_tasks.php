@@ -32,9 +32,9 @@ class Tasks extends Migration
         Schema::create('tasks_commands', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tasks_id')->nullable();
-            $table->foreign('tasks_id')->references('id')->on('tasks')->onDelete('cascade');;
+            $table->foreign('tasks_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->unsignedInteger('commands_id')->nullable();
-            $table->foreign('commands_id')->references('id')->on('commands')->onDelete('cascade');;
+            $table->foreign('commands_id')->references('id')->on('commands')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -49,9 +49,9 @@ class Tasks extends Migration
         Schema::create('commands_parameters', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('commands_id')->nullable();
-            $table->foreign('commands_id')->references('id')->on('commands');
+            $table->foreign('commands_id')->references('id')->on('commands')->onDelete('cascade');
             $table->unsignedInteger('parameters_id')->nullable();
-            $table->foreign('parameters_id')->references('id')->on('parameters');
+            $table->foreign('parameters_id')->references('id')->on('parameters')->onDelete('cascade');
             $table->string('value')->nullable();
             $table->timestamps();
         });
@@ -66,9 +66,9 @@ class Tasks extends Migration
         Schema::create('tasks_variables', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tasks_id')->nullable();
-            $table->foreign('tasks_id')->references('id')->on('tasks');
+            $table->foreign('tasks_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->unsignedInteger('variables_id')->nullable();
-            $table->foreign('variables_id')->references('id')->on('variables');
+            $table->foreign('variables_id')->references('id')->on('variables')->onDelete('cascade');
             $table->timestamps();
         });
     }
