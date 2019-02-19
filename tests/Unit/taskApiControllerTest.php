@@ -12,7 +12,7 @@ class taskApiControllerTest extends TestCase
      * @return void
      */
     public function testFetch() {
-        $this->post(route('task.get'))
+        $this->get(route('task.get'))
             ->assertStatus(200);
     }
 
@@ -23,7 +23,7 @@ class taskApiControllerTest extends TestCase
         $data = [
             'id' => 1,
         ];
-        $this->post(route('task.getById'), $data)
+        $this->get('/api/tasks/' . $data['id'])
             ->assertStatus(200)
             ->assertJsonFragment($data);
     }
