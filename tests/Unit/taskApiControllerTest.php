@@ -7,10 +7,31 @@ use App\tasks;
 
 class taskApiControllerTest extends TestCase
 {
+
     /**
      * @return void
      */
-    public function testCanPersist() {
+    public function testFetch() {
+        $this->post(route('task.get'))
+            ->assertStatus(200);
+    }
+
+    /**
+     * @return void
+     */
+    public function testGet() {
+        $data = [
+            'id' => 1,
+        ];
+        $this->post(route('task.getById'), $data)
+            ->assertStatus(200)
+            ->assertJsonFragment($data);
+    }
+
+    /**
+     * @return void
+     */
+    public function testPersist() {
         $data = [
             'name' => $this->faker->name,
             'description' => $this->faker->paragraph,
