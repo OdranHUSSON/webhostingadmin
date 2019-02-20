@@ -46,20 +46,23 @@
                             </ul>
                         </div>
                         <div class="tab-pane" id="new">
-                            <form class="col s12">
+
+                            <form class="col s12" id="newtask" @submit="submitTask">
+                                {{ csrf_field() }}
                                 <div class="row">
-                                    <div class="input-field col s12">
-                                        <input placeholder="Placeholder" id="task_name" type="text" class="validate">
-                                        <label for="task_name">Description</label>
+                                    <div class="col-md-12">
+                                        <label class="bmd-label-floating" for="name">Name</label>
+                                        <input class="form-control" type="text" name="name" value="" pattern="[A-Za-z0-9\-\/]+">
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="input-field col s12">
-                                        <textarea id="task_description" class="materialize-textarea"></textarea>
-                                        <label for="task_description">Description</label>
+                                    <div class="col-md-12">
+                                        <label class="bmd-label-floating" for="description">Description</label>
+                                        <textarea class="form-control"  name="description"></textarea>
                                     </div>
                                 </div>
-                                <button class="btn btn-large right waves-effect waves-light" type="submit">Save</button>
+                                <button type="submit" class="btn btn-info pull-right">Enregistrer</button>
+                                <div class="clearfix"></div>
                             </form>
                         </div>
                     </div>
