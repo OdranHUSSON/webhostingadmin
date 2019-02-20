@@ -14,7 +14,7 @@ class tasksController extends Controller
     public function index()
     {
         $tasks = tasks::all();
-        return view('tasks')
-            ->with("tasks", $tasks);
+        //return view('tasks')->with("tasks", $tasks);
+        return view('test');
     }
 }
