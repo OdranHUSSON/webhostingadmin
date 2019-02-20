@@ -25,7 +25,7 @@ class tasksApiController extends Controller
      */
     public function fetch() {
         /** @var tasks $tasks */
-        $tasks = tasks::paginate(20);
+        $tasks = tasks::latest()->paginate(20);
         return response()->json($tasks);
     }
 
