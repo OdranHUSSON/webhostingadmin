@@ -8,6 +8,7 @@ import Icons from "../pages/Icons.vue";
 import Maps from "../pages/Maps.vue";
 import Notifications from "../pages/Notifications.vue";
 import UpgradeToPRO from "../pages/UpgradeToPRO.vue";
+import Tasks from "../pages/Tasks.vue";
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
         path: "table",
         name: "Table List",
         component: TableList
+      },
+      {
+        path: "tasks",
+        name: "Tasks",
+        component: Tasks
       },
       {
         path: "typography",
