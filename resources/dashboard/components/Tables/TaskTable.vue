@@ -32,9 +32,16 @@
             };
         },
         mounted () {
+            var self = this;
             axios
                 .get('/api/tasks')
-                .then(response => (this.tasks = response.data.data))
+                .then(function(response) {
+                    response = response.data;
+                    console.log(response);
+                    self.tasks = response.data;
+
+
+                })
                 .catch(error => console.log(error))
         }
     };
