@@ -18,9 +18,12 @@
             </md-card-content>
         </md-card>
         <div class="pager">
-            <a href="#" v-for="n in pager" v-on:click="updateData(n)">
-                {{ n }}
-            </a>
+            <ul>
+                <li class="pager" v-for="n in pager" v-on:click="updateData(n, $event)">
+                    <a href="#" class="active" v-if="currentPage==n">{{ n }}</a>
+                    <a href="#" v-else>{{ n }}</a>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -44,7 +47,8 @@
                         updated_at: ""
                     }
                 ],
-                pager: 1
+                pager: 1,
+                currentPage: 1
             };
         },
         mounted() {
@@ -59,6 +63,7 @@
                         console.log(response);
                         self.tasks = response.data;
                         self.pager = response.last_page;
+                        self.currentPage = response.current_page;
                     })
                     .catch(error => console.log(error))
             }
