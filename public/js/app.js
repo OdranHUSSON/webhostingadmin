@@ -58136,12 +58136,47 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
  // MaterialDashboard plugin
 
 
- // configure router
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: _routes_routes__WEBPACK_IMPORTED_MODULE_3__["default"],
-  // short for routes: routes
-  linkExactActiveClass: "nav-item active"
+  linkExactActiveClass: "nav-item active",
+  mode: 'history'
+});
+router.beforeEach(function (to, from, next) {
+  // This goes through the matched routes from last to first, finding the closest route with a title.
+  // eg. if we have /some/deep/nested/route and /some, /deep, and /nested have titles, nested's will be chosen.
+  var nearestWithTitle = to.matched.slice().reverse().find(function (r) {
+    return r.meta && r.meta.title;
+  }); // Find the nearest route element with meta tags.
+
+  var nearestWithMeta = to.matched.slice().reverse().find(function (r) {
+    return r.meta && r.meta.metaTags;
+  });
+  var previousNearestWithMeta = from.matched.slice().reverse().find(function (r) {
+    return r.meta && r.meta.metaTags;
+  }); // If a route with a title was found, set the document (page) title to that value.
+
+  if (nearestWithTitle) document.title = nearestWithTitle.meta.title; // Remove any stale meta tags from the document using the key attribute we set below.
+
+  Array.from(document.querySelectorAll('[data-vue-router-controlled]')).map(function (el) {
+    return el.parentNode.removeChild(el);
+  }); // Skip rendering meta tags if there are none.
+
+  if (!nearestWithMeta) return next(); // Turn the meta tag definitions into actual elements in the head.
+
+  nearestWithMeta.meta.metaTags.map(function (tagDef) {
+    var tag = document.createElement('meta');
+    Object.keys(tagDef).forEach(function (key) {
+      tag.setAttribute(key, tagDef[key]);
+    }); // We use this to track which meta tags we create, so we don't interfere with other ones.
+
+    tag.setAttribute('data-vue-router-controlled', '');
+    return tag;
+  }) // Add the meta tags to the document head.
+  .forEach(function (tag) {
+    return document.head.appendChild(tag);
+  });
+  next();
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$Chartist = chartist__WEBPACK_IMPORTED_MODULE_8___default.a;
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -60616,22 +60651,60 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: "/",
   component: _pages_Layout_DashboardLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  title: "Dashboard home",
+  metaTags: [{
+    name: 'description',
+    content: 'Home page of the dashboard application app'
+  }, {
+    property: 'og:description',
+    content: 'Home page of the dashboard application app'
+  }],
   redirect: "/dashboard",
   children: [{
     path: "dashboard",
     name: "Dashboard",
+    metaTags: [{
+      name: 'description',
+      content: 'Dashboard.'
+    }, {
+      property: 'og:description',
+      content: 'Dashboard.'
+    }],
     component: _pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }, {
     path: "user",
     name: "User Profile",
+    metaTags: [{
+      name: 'description',
+      content: 'User Profile'
+    }, {
+      property: 'og:description',
+      content: 'User Profile.'
+    }],
     component: _pages_UserProfile_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
     path: "table",
     name: "Table List",
+    title: "Table List",
+    metaTags: [{
+      name: 'description',
+      content: 'Table List.'
+    }, {
+      property: 'og:description',
+      content: 'Table List.'
+    }],
     component: _pages_TableList_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: "tasks",
     name: "Tasks",
+    title: "Tasks",
+    metaTags: [{
+      name: 'description',
+      content: 'Tasks.'
+    }, {
+      property: 'og:description',
+      content: 'Tasks.'
+    }],
     component: _pages_Tasks_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   }, {
     path: "typography",

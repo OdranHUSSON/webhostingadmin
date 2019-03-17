@@ -14,26 +14,79 @@ const routes = [
   {
     path: "/",
     component: DashboardLayout,
+    title: "Dashboard home",
+    metaTags: [
+        {
+            name: 'description',
+            content: 'Home page of the dashboard application app'
+        },
+        {
+            property: 'og:description',
+            content: 'Home page of the dashboard application app'
+        }
+    ],
     redirect: "/dashboard",
     children: [
       {
         path: "dashboard",
         name: "Dashboard",
+        metaTags: [
+            {
+                name: 'description',
+                content: 'Dashboard.'
+            },
+            {
+                property: 'og:description',
+                content: 'Dashboard.'
+            }
+        ],
         component: Dashboard
       },
       {
         path: "user",
         name: "User Profile",
+        metaTags: [
+          {
+              name: 'description',
+              content: 'User Profile'
+          },
+          {
+              property: 'og:description',
+              content: 'User Profile.'
+          }
+        ],
         component: UserProfile
       },
       {
         path: "table",
         name: "Table List",
+        title: "Table List",
+        metaTags: [
+          {
+              name: 'description',
+              content: 'Table List.'
+          },
+          {
+              property: 'og:description',
+              content: 'Table List.'
+          }
+        ],
         component: TableList
       },
       {
         path: "tasks",
         name: "Tasks",
+        title: "Tasks",
+        metaTags: [
+          {
+              name: 'description',
+              content: 'Tasks.'
+          },
+          {
+              property: 'og:description',
+              content: 'Tasks.'
+          }
+        ],
         component: Tasks
       },
       {
